@@ -8,7 +8,7 @@ const PORT =  process.env.PORT || 3017;
 
 const ElectricityMeters = require('./electricity-meters');
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432/topups';
+const connectionString = process.env.DATABASE_URL || 'postgresql://owethusotomela:owethusotomela@localhost:5432/topups';
 
 const pool = new Pool({
     connectionString  
@@ -23,7 +23,7 @@ app.use(express.static('public'));
 
 // add more middleware to allow for templating support
 
-app.engine('handlebars', exphbs());
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 const electricityMeters = ElectricityMeters(pool);
