@@ -33,16 +33,12 @@ app.get('/', function(req, res) {
 });
 
 app.get('/streets', async function(req, res){
-	res.render('streets');
-})
-
-app.get('/streets', async function(req, res) {
 	const streets = await electricityMeters.streets();
 	console.log(streets);
 	res.render('streets', {
 		streets
 	});
-});
+})
 
 app.get('/meter/:street_id', async function(req, res) {
 
