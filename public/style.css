@@ -24,3 +24,7 @@ table {
   tr:nth-child(even) {
 	background-color: #dddddd;
   }
+
+#home{
+	margin-top: 30vh;
+}

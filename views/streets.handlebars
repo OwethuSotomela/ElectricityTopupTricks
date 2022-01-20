@@ -1,18 +1,27 @@
-<h2>Streets</h2>
+<div class="container">
+	<center>
+		<h2>Streets</h2>
+	</center>
 
-<table>
-	<tr>
-		<th>Name</th>
-		<th>_id</th>
-	</tr>
-	{{#each streets}}
-	<tr>
-		<td>
-			{{name}}
-		</td>
-		<td>
-			<a href="/meter/{{id}}">Meters in street</a>
-		</td>
-	</tr>
-	{{/each}}
-</table>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>_id</th>
+		</tr>
+		{{#each streets}}
+		<tr>
+			<td>
+				{{name}}
+			</td>
+			<td>
+				<a href="/meter/{{id}}">Meters in street</a>
+			</td>
+		</tr>
+		{{/each}}
+	</table>
+	<div class="col-12" id="home">
+		<form action="/home" method="GET">
+			<button type="submit" class="btn btn-primary"><em>Home</em></button>
+		</form>
+	</div>
+</div>

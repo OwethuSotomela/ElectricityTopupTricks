@@ -82,6 +82,10 @@ app.post('/meter/use/:meter_id', async function(req, res) {
 
 });
 
+app.get('/home', async function(req, res){
+	res.redirect('/');
+})
+
 // start  the server and start listening for HTTP request on the PORT number specified...
 app.listen(PORT, function() {
 	console.log(`App started on port ${PORT}`)
