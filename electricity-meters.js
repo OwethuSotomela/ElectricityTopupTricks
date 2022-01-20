@@ -9,7 +9,7 @@ module.exports = function(pool) {
 
 	// for a given street show all the meters and their balances
 	async function streetMeters(street_id) {
-		const meters = await pool.query(`SELECT * FROM electricity_meter WHERE street_id=$1`, [street_id]);
+		const meters = await pool.query(`SELECT * FROM electricity_meter JOIN street ON electricity_meter.street_id = street.id WHERE street_id = $1`, [street_id]);
 		return meters.rows;
 	}
 
