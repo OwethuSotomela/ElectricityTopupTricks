@@ -35,10 +35,12 @@ app.get('/', function(req, res) {
 app.get('/streets', async function(req, res){
 	const streets = await electricityMeters.streets();
 	const lowBalance = await electricityMeters.lowestBalanceMeter();
-	console.log(lowBalance);
+	const highBalance = await electricityMeters.highestBalanceStreet()
+	console.log(highBalance);
 	res.render('streets', {
 		streets:streets,
-		lowBalance:lowBalance
+		lowBalance:lowBalance,
+		highBalance:highBalance
 
 	});
 })
@@ -73,7 +75,7 @@ app.get('/meter/:street_id', async function(req, res) {
 app.get('/meter/use/:meter_id', async function(req, res) {
 
 	// show the current meter balance and select the appliance you are using electricity for
-	res.render('use_electicity', {
+	res.render('use_electricity', {
 		meters
 	});
 });
@@ -84,6 +86,14 @@ app.post('/meter/use/:meter_id', async function(req, res) {
 	res.render(`/meter/user/${req.params.meter_id}`);
 
 });
+
+app.get('/use_electricity', async function(req, res){
+	var appliances = await electricityMeters.getAppliances()
+	console.log(appliances)
+	res.render('use_electricity',{
+		appliances 
+	});
+})
 
 app.get('/home', async function(req, res){
 	res.redirect('/');

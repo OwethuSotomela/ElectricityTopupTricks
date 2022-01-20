@@ -19,7 +19,6 @@ module.exports = function (pool) {
 		return appliance.rows;
 	}
 
-
 	// increase the meter balance for the meterId supplied
 	async function topupElectricity(meterId, units) {
 		await pool.query('UPDATE electricity_meter SET balance = balance + $1 WHERE id = $2', [units, meterId]);
@@ -28,6 +27,12 @@ module.exports = function (pool) {
 	// return the data for a given balance
 	function meterData(meterId) {
 
+	}
+
+	// Get appliances
+	async function getAppliances(){
+		const appliances = await pool.query(`SELECT * FROM appliance`);
+		return appliances.rows;
 	}
 
 	// decrease the meter balance for the meterId supplied
@@ -44,8 +49,13 @@ module.exports = function (pool) {
 	}
 
 	async function lowestBalanceMeter(){
-		const meter = await  pool.query(`SELECT electricity_meter.id, balance, street_number, MIN(balance) from electricity_meter JOIN street ON electricity_meter.street_id = street.id GROUP BY  electricity_meter.id  LIMIT 1`);
-		console.log(meter);
+		const meter = await pool.query(`SELECT electricity_meter.id, balance, street_number, MIN(balance) FROM electricity_meter JOIN street ON electricity_meter.street_id = street.id GROUP BY electricity_meter.id LIMIT 1`);
+		return meter.rows;
+	}
+
+	async function highestBalanceStreet(street){
+		const meter = await pool.query(`SELECT * FROM electricity_meter JOIN street ON electricity_meter.street_id = street.id WHERE name = $1`, [street]);
+		console.log(meter.rows)
 		return meter.rows;
 	}
 
@@ -56,7 +66,9 @@ module.exports = function (pool) {
 		topupElectricity,
 		meterData,
 		useElectricity,
-		lowestBalanceMeter
+		lowestBalanceMeter,
+		highestBalanceStreet,
+		getAppliances,
 	}
 
 
