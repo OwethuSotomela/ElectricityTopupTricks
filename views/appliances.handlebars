@@ -1,0 +1,16 @@
+<div class="container">
+    <table>
+        <tr>
+            <th>_id</th>
+            <th>Name</th>
+            <th>Rate</th>
+        </tr>
+        {{#each streets}}
+        <tr>
+            <td><a href="/meters/{{id}}">{{id}}</a></td>
+            <td>{{name}}</td>
+            <td>{{rate}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</div>
