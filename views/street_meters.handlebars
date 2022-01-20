@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table>
+                <tr>
+                    <th>Street number</th>
+                    <th>Name</th>
+                    <th>Meter balance</th>
+                </tr>
+                {{#each meters}}
+                <tr>
+                    <td><a href="">{{street_number}}</a></td>
+                    <td>{{name}}</td>
+                    <td>{{balance}}</td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+</div>
