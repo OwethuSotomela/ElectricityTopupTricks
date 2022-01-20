@@ -48,6 +48,7 @@ app.get('/appliances', async function(req, res){
 	})
 })
 
+
 app.get('/meter/:street_id', async function(req, res) {
 
 	// use the streetMeters method in the factory function...
@@ -56,6 +57,10 @@ app.get('/meter/:street_id', async function(req, res) {
 	// create  template called street_meters.handlebars
 	// in there loop over all the meters and show them on the screen.
 	// show the street number and name and the meter balance
+	var street_id = req.params.street_id
+	console.log(street_id);
+	var meters = await electricityMeters.streetMeters(street_id);
+	console.log(meters);
 
 	res.render('street_meters', {
 		meters
