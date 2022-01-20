@@ -34,15 +34,18 @@ app.get('/', function(req, res) {
 
 app.get('/streets', async function(req, res){
 	const streets = await electricityMeters.streets();
-	console.log(streets);
+	const lowBalance = await electricityMeters.lowestBalanceMeter();
+	console.log(lowBalance);
 	res.render('streets', {
-		streets
+		streets:streets,
+		lowBalance:lowBalance
+
 	});
 })
 
 app.get('/appliances', async function(req, res){
 	const appliance = await electricityMeters.appliances();
-	console.log(appliance);
+	// console.log(appliance);
 	res.render('appliances', {
 		appliance
 	})
@@ -58,7 +61,7 @@ app.get('/meter/:street_id', async function(req, res) {
 	// in there loop over all the meters and show them on the screen.
 	// show the street number and name and the meter balance
 	var street_id = req.params.street_id
-	console.log(street_id);
+	// console.log(street_id);
 	var meters = await electricityMeters.streetMeters(street_id);
 	console.log(meters);
 
